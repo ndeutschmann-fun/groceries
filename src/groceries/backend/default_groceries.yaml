@@ -1,0 +1,4 @@
+- name: "potatoes"
+  category: "vegetables"
+- name: "raclette"
+  category: "cheese"
