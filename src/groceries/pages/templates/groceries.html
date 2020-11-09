@@ -6,10 +6,14 @@
 </head>
 <body>
 <h1>Groceries</h1>
-<ul>
+<form method="post" action="/add_groceries">
     {% for item in groceries %}
-    <li>{{item.name}} ({{item.category}})</li>
+    <input type="checkbox" id="{{item.name}}" name="{{item.name}}" value="True" {% if item.need %} checked {% endif %}>
+    <label for="{{item.name}}">{{item.name}} ({{item.category}})</label>
+    <br>
     {% endfor %}
-</ul>
+    <br>
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>
