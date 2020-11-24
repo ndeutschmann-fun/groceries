@@ -2,9 +2,11 @@
 
 from .index import index
 from .groceries import grocerypage
+from .groceries import going_shopping
 
 active_pages = [
     index,
-    grocerypage
+    grocerypage,
+    going_shopping
 ]
 

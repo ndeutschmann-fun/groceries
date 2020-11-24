@@ -11,6 +11,9 @@ class GroceryItem:
         self.name = name
         self.category = category
         self.need = needed
+    
+    def is_needed(self):
+        return self.need
 
     def needed(self):
         self.need = True
@@ -35,8 +38,8 @@ class Groceries(UserDict):
 
     def __init__(self, groceries):
         assert all([isinstance(g, GroceryItem) for g in groceries])
-        grocery_dict = dict([(g.name, g) for g in groceries])
-        super(Groceries, self).__init__(grocery_dict)
+        groceries_dict = dict([(g.name, g) for g in groceries])
+        super(Groceries, self).__init__(groceries_dict)
 
     def reset(self):
         for key in self:
@@ -51,3 +54,16 @@ class Groceries(UserDict):
 
     def to_list(self):
         return list(self.values())
+    
+    def going_shopping(self):
+        shopping_list = []
+        for item in self.values():
+            if item.is_needed():
+                shopping_list.append(item)
+        return list(shopping_list)
+        
+    def done_shopping(self, items):
+        for item in items:
+            self[item].buy()
+        
+            

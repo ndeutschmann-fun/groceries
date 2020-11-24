@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Going shopping</title>
+</head>
+<body>
+<h1>Going shopping</h1>
+<form method="post" action="/done_shopping">
+    {% for item in shopping_list %}
+    <input type="checkbox" id="{{item.name}}" name="{{item.name}}" value="True" {% if not item.need %} checked {% endif %}>
+    <label for="{{item.name}}">{{item.name}} ({{item.category}})</label>
+    <br>
+    {% endfor %}
+    <br>
+    <input type="submit" value="I finished shopping!">
+</form>
+</body>
+</html>
