@@ -5,7 +5,7 @@ from groceries.app import engine, app
 
 @app.route("/groceries")
 def grocerypage():
-    return render_template("groceries.html", groceries=engine.grocery_list.to_list())
+    return render_template("groceries.html", groceries=engine.grocery_list)
 
 
 @app.route("/add_groceries", methods=['POST'])

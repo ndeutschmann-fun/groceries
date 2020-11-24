@@ -11,7 +11,7 @@ class GroceryItem:
         self.name = name
         self.category = category
         self.need = needed
-    
+
     def is_needed(self):
         return self.need
 
@@ -54,16 +54,22 @@ class Groceries(UserDict):
 
     def to_list(self):
         return list(self.values())
-    
+
     def going_shopping(self):
         shopping_list = []
         for item in self.values():
             if item.is_needed():
                 shopping_list.append(item)
         return list(shopping_list)
-        
+
     def done_shopping(self, items):
         for item in items:
             self[item].buy()
-        
-            
+
+    @property
+    def categories(self):
+        categories = set()
+        for item in self.values():
+            categories.add(item.category)
+
+        return list(categories)

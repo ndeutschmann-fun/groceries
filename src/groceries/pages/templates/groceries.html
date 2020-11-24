@@ -6,14 +6,61 @@
 </head>
 <body>
 <h1>Groceries</h1>
-<form method="post" action="/add_groceries">
-    {% for item in groceries %}
-    <input type="checkbox" id="{{item.name}}" name="{{item.name}}" value="True" {% if item.need %} checked {% endif %}>
-    <label for="{{item.name}}">{{item.name}} ({{item.category}})</label>
-    <br>
+
+<h2 id="formtitle">Category</h2>
+<form action="#" onsubmit="return ShowOnly(this)">
+    {% for category in groceries.categories %}
+    <div>
+        <input type="radio" id="{{category.replace(' ','_')}}" name="category" value="{{category.replace(' ','_')}}">
+        <label for="{{category.replace(' ','_')}}">{{category}}</label>
+    </div>
+    {% endfor %}
+
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+</form>
+
+<form method="post" iaction="/add_groceries">
+    {% for item in groceries.values() %}
+    <div class="grocery {{item.category.replace(' ','_')}}">
+        <input type="checkbox" id="{{item.name}}" name="{{item.name}}" value="True" {% if item.need %} checked {% endif
+               %}>
+        <label for="{{item.name}}">{{item.name}}</label>
+    </div>
     {% endfor %}
     <br>
     <input type="submit" value="Submit">
 </form>
+
+
+<script>
+    function Show(element) {
+        element.style.display = "block"
+    }
+
+    function Hide(element) {
+        element.style.display = "none"
+    }
+
+    function ShowOnly(form_element) {
+        var all_items = document.getElementsByClassName("grocery");
+        for (var i = 0; i < all_items.length; i++) {
+            Hide(all_items.item(i))
+        }
+
+        var cat = form_element.category.value;
+        document.getElementById("formtitle").innerHTML = cat
+
+
+        var cat_items = document.getElementsByClassName(cat);
+        console.log(cat_items)
+        for (var i = 0; i < cat_items.length; i++) {
+            Show(cat_items.item(i))
+        }
+        return false
+    }
+</script>
+
 </body>
 </html>
