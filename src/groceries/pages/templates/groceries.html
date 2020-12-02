@@ -1,27 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Groceries</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Shopping list{% endblock %}
+
+{% block content %}
 <h1>Groceries</h1>
 
 <h2 id="formtitle">Category</h2>
 <form action="#" onsubmit="return ShowOnly(this)">
+    <div id="cat_list">
     {% for category in groceries.categories %}
-    <div>
+    <span>
         <input type="radio" id="{{category.replace(' ','_')}}" name="category" value="{{category.replace(' ','_')}}">
         <label for="{{category.replace(' ','_')}}">{{category}}</label>
-    </div>
+    </span>
     {% endfor %}
+    </div>
 
-    <div>
+    <div id="cat_submit">
         <input type="submit" value="Submit">
     </div>
 </form>
 
-<form method="post" iaction="/add_groceries">
+<form method="post" action="/add_groceries">
     {% for item in groceries.values() %}
     <div class="grocery {{item.category.replace(' ','_')}}">
         <input type="checkbox" id="{{item.name}}" name="{{item.name}}" value="True" {% if item.need %} checked {% endif
@@ -50,7 +50,6 @@
         }
 
         var cat = form_element.category.value;
-        document.getElementById("formtitle").innerHTML = cat
 
 
         var cat_items = document.getElementsByClassName(cat);
@@ -62,5 +61,4 @@
     }
 </script>
 
-</body>
-</html>
+{% endblock %}
