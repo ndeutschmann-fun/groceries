@@ -1,4 +1,4 @@
 .idea 
-*.py
+*.pyc
 groceries.v
 **/__pycache__/
